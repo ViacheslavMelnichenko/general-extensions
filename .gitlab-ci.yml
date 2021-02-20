@@ -1,8 +1,5 @@
 image: mcr.microsoft.com/dotnet/sdk:5.0
 
-before_script:
-    - dotnet --version
-
 stages:
     - build
     - test
@@ -19,10 +16,12 @@ build:
 test:
     stage: test
     script:
-        - dotnet test -c Release /p:CollectCoverage=true
-    coverage: /\|\s*Total\s*\|\s*(\d+[,.]\d+%)/
+        - dotnet test -c Release
 
 deploy:
     stage: deploy
     script:
-        - dotnet --version
+        - dotnet pack ./src/General.Extensions/General.Extensions.csproj -p:PackageVersion=$CI_JOB_ID -o:Packages --no-restore
+    artifacts:
+        paths:
+        - Packages/
