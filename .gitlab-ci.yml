@@ -2,8 +2,8 @@ image: mcr.microsoft.com/dotnet/sdk:5.0
 
 variables:
     MAIN_VERSION: 2
-    YEAR: $(date +"%y")
-    MONTH: $(date +"%m")
+    YEAR: date +"%y"
+    MONTH: date +"%m"
     MINOR_VERSION: $CI_PIPELINE_IID
     PACKAGE_VERSION: "$MAIN_VERSION/.$YEAR.$MONTH/.$MINOR_VERSION/.$CI_PIPELINE_IID"
 
@@ -16,7 +16,7 @@ stages:
 build:
     stage: build
     script:
-        - echo $CI_PIPELINE_IID
+        - echo $PACKAGE_VERSION
         - dotnet build -c $CONFIGURATION
     artifacts:
       paths:
