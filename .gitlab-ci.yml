@@ -1,11 +1,14 @@
 image: mcr.microsoft.com/dotnet/sdk:5.0
 
+
 variables:
     MAIN_VERSION: 2
-    YEAR: date +"%y"
-    MONTH: date +"%m"
-    MINOR_VERSION: $CI_PIPELINE_IID
-    PACKAGE_VERSION: "${MAIN_VERSION}.${YEAR}.${MONTH}.${MINOR_VERSION}"
+    
+before_script:
+     - YEAR=$(date +"%y")
+     - MONTH=$(date +"%m")
+     - MINOR_VERSION=$CI_PIPELINE_IID
+     - PACKAGE_VERSION=${MAIN_VERSION}.${YEAR}.${MONTH}.${MINOR_VERSION}
 
 stages:
     - build
