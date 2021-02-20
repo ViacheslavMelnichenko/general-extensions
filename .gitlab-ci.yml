@@ -1,32 +1,28 @@
 image: mcr.microsoft.com/dotnet/sdk:5.0
 
+before_script:
+    - dotnet --version
+    - 
 stages:
     - build
     - test
     - deploy
 
-before_script:
-    - echo "running Before scripts"
-    - dotnet --version
-
 build:
     stage: build
     script:
-        - echo "run dotnet build -c:Release"
-        - "dotnet build -c:Release"
+        - dotnet build -c Release
     artifacts:
       paths:
-        - bin/
+        - src/
 
 test:
     stage: test
-    script: 
-        - echo "run test -c:Release"
-        - "dotnet test -c:Release"
+    script:
+        - dotnet test -c Release /p:CollectCoverage=true
     coverage: /\|\s*Total\s*\|\s*(\d+[,.]\d+%)/
 
 deploy:
     stage: deploy
     script:
-        - echo "run dotnet deploy"
-        - "dotnet --version"
+        - dotnet --version
