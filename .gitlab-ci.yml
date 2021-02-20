@@ -4,8 +4,8 @@ variables:
     MAIN_VERSION: 2
     YEAR: date +"%y"
     MONTH: date +"%m"
-    MINOR_VERSION: "$$CI_PIPELINE_IID"
-    PACKAGE_VERSION: "$$MAIN_VERSION/.$$YEAR/.$$MONTH/.$$MINOR_VERSION"
+    MINOR_VERSION: ${CI_PIPELINE_IID}
+    PACKAGE_VERSION: "${MAIN_VERSION}.${YEAR}.${MONTH}.${MINOR_VERSION}"
 
 stages:
     - build
