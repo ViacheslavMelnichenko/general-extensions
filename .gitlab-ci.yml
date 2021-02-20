@@ -8,7 +8,6 @@ stages:
 before_script:
     - echo "running Before scripts"
     - dotnet --version
-    - nuget --version
 
 build:
     stage: build
