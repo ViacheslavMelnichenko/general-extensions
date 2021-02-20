@@ -6,7 +6,8 @@ variables:
 stages:
     - build
     - test
-    - deploy
+    - pack
+    - publish
 
 build:
     stage: build
@@ -15,6 +16,7 @@ build:
     artifacts:
       paths:
         - src/
+        - test/
     only:
         - merge_requests
         - master
@@ -22,18 +24,24 @@ build:
 test:
     stage: test
     script:
-        - dotnet test -c $CONFIGURATION
+        - dotnet vstest test/General.Extensions.UnitTests/bin/Release/net5.0/General.Extensions.UnitTests.dll
     only:
         - merge_requests
         - master
 
-deploy:
-    stage: deploy
+pack:
+    stage: pack
     script:
-        - echo $PACKAGE_VERSION
         - dotnet pack ./src/General.Extensions/General.Extensions.csproj -p:PackageVersion="$PACKAGE_VERSION" -o:Packages --no-restore
     artifacts:
         paths:
         - Packages/
+    only:
+        - master
+
+publish:
+    stage: publish
+    script:
+        - dotnet nuget push Packages/General.Extensions.$PACKAGE_VERSION.nupkg -k $NUGET_API_KEY -s $NUGET_FEED
     only:
         - master
