@@ -1,13 +1,20 @@
-image: mcr.microsoft.com/dotnet/core/sdk:latest
+image: mcr.microsoft.com/dotnet/sdk:5.0
 
 stages:
     - build
     - test
+    - deploy
+
+before_script:
+    - dotnet --version
+    - nuget help | select-string Version
 
 build:
+    only:
+        - merge_request
     stage: build
     script:
-        - "dotnet build"
+        - "dotnet build -c:Release"
     artifacts:
       paths:
         - bin/
@@ -15,4 +22,13 @@ build:
 test:
     stage: test
     script: 
-        - "dotnet test"
+        - "dotnet test -c:Release"
+    coverage: /\|\s*Total\s*\|\s*(\d+[,.]\d+%)/
+
+deploy:
+    only:
+        - merge_request
+        - master
+    stage: deploy
+    script:
+        - "dotnet --version"
