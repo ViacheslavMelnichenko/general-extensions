@@ -12,6 +12,7 @@ before_script:
 build:
     only:
         - merge_request
+        - master
     stage: build
     script:
         - "dotnet build -c:Release"
