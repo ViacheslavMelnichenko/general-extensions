@@ -43,7 +43,7 @@ pack:
         - dotnet pack src/General.Extensions/General.Extensions.csproj -p:PackageVersion="$PACKAGE_VERSION" -o:packages --no-restore
     artifacts:
         paths:
-        - Packages/
+        - packages/
     only:
         - master
 
