@@ -1,7 +1,7 @@
 image: mcr.microsoft.com/dotnet/sdk:5.0
 
 variables:
-    PACKAGE_VERSION: "$CI_JOB_ID022021"
+    PACKAGE_VERSION: "$CI_JOB_ID$MONTH_YEAR"
 
 stages:
     - build
@@ -30,6 +30,7 @@ test:
 deploy:
     stage: deploy
     script:
+        - echo $PACKAGE_VERSION
         - dotnet pack ./src/General.Extensions/General.Extensions.csproj -p:PackageVersion=$PACKAGE_VERSION -o:Packages --no-restore
     artifacts:
         paths:
