@@ -4,7 +4,7 @@ variables:
     MAIN_VERSION: 2
     YEAR: $(date +"%y")
     MONTH: $(date +"%m")
-    MINOR_VERSION: $CI_JOB_ID
+    MINOR_VERSION: $CI_PIPELINE_IID
     PACKAGE_VERSION: "$MAIN_VERSION.$YEAR.$MONTH.$MINOR_VERSION"
 
 stages:
@@ -16,6 +16,7 @@ stages:
 build:
     stage: build
     script:
+        - echo $CI_PIPELINE_IID
         - dotnet build -c $CONFIGURATION
     artifacts:
       paths:
