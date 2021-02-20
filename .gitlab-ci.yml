@@ -1,5 +1,9 @@
 image: mcr.microsoft.com/dotnet/sdk:5.0
 
+variables:
+    CONFIGURATION: Release
+    PACKAGE_VERSION: "$CI_JOB_ID022021"
+
 stages:
     - build
     - test
@@ -8,20 +12,28 @@ stages:
 build:
     stage: build
     script:
-        - dotnet build -c Release
+        - dotnet build -c $CONFIGURATION
     artifacts:
       paths:
         - src/
+    only:
+        - merge_requests
+        - master
 
 test:
     stage: test
     script:
-        - dotnet test -c Release
+        - dotnet test -c $CONFIGURATION
+    only:
+        - merge_requests
+        - master
 
 deploy:
     stage: deploy
     script:
-        - dotnet pack ./src/General.Extensions/General.Extensions.csproj -p:PackageVersion=$CI_JOB_ID -o:Packages --no-restore
+        - dotnet pack ./src/General.Extensions/General.Extensions.csproj -p:PackageVersion=$PACKAGE_VERSION -o:Packages --no-restore
     artifacts:
         paths:
         - Packages/
+    only:
+        - master
