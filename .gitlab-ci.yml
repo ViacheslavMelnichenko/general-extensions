@@ -6,15 +6,14 @@ stages:
     - deploy
 
 before_script:
+    - echo "running Before scripts"
     - dotnet --version
     - nuget help | select-string Version
 
 build:
-    only:
-        - merge_request
-        - master
     stage: build
     script:
+        - echo "run dotnet build -c:Release"
         - "dotnet build -c:Release"
     artifacts:
       paths:
@@ -23,13 +22,12 @@ build:
 test:
     stage: test
     script: 
+        - echo "run test -c:Release"
         - "dotnet test -c:Release"
     coverage: /\|\s*Total\s*\|\s*(\d+[,.]\d+%)/
 
 deploy:
-    only:
-        - merge_request
-        - master
     stage: deploy
     script:
+        - echo "run dotnet deploy"
         - "dotnet --version"
