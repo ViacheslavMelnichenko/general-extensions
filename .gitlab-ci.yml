@@ -30,7 +30,14 @@ build:
 test:
     stage: test
     script:
-        - dotnet vstest test/General.Extensions.UnitTests/bin/Release/net5.0/General.Extensions.UnitTests.dll
+        - dotnet test test/General.Extensions.UnitTests.csproj -c $CONFIGURATION --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+    artifacts:
+        when: always
+        paths:
+            - ./**/*test-result.xml
+        reports:
+            junit:
+            - ./**/*test-result.xml
     only:
         - merge_requests
         - master
