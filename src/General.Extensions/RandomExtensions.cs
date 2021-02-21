@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Data;
 using System.Text;
 
-namespace GenericExtensions
+namespace General.Extensions
 {
     public static class RandomExtensions
     {

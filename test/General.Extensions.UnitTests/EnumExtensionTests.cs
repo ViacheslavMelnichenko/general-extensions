@@ -4,7 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using Xunit;
 
-namespace GenericExtensions.Tests.tests
+namespace General.Extensions.UnitTests
 {
     public class EnumExtensionTests
     {

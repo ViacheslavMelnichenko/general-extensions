@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace GenericExtensions
+namespace General.Extensions
 {
     public static class EnumExtensions
     {

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using FluentAssertions;
-using GenericExtensions.src;
 using Xunit;
 
-namespace GenericExtensions.Tests.tests
+namespace General.Extensions.UnitTests
 {
     public class WaitTests
     {
