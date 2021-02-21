@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace GenericExtensions.src
+namespace General.Extensions
 {
     public static class Wait
     {

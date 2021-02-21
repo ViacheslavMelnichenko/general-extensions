@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using FluentAssertions;
 using Xunit;
 
-namespace GenericExtensions.Tests.tests
+namespace General.Extensions.UnitTests
 {
     public class StringExtensionTests
     {
