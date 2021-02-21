@@ -30,7 +30,7 @@ build:
 test:
     stage: test
     script:
-        - dotnet test test/General.Extensions.UnitTests.csproj -c $CONFIGURATION --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+        - dotnet test test/General.Extensions.UnitTests/General.Extensions.UnitTests.csproj -c $CONFIGURATION --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
     artifacts:
         when: always
         paths:
