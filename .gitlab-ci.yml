@@ -19,7 +19,6 @@ stages:
 build:
     stage: build
     script:
-        - echo $PACKAGE_VERSION
         - dotnet build -c $CONFIGURATION
     artifacts:
       paths:
