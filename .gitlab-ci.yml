@@ -11,7 +11,7 @@ before_script:
 
 stages:
     - build
-    - test
+    - unit_tests
     - pack
     - publish
 
@@ -27,8 +27,8 @@ build:
         - merge_requests
         - master
 
-test:
-    stage: test
+unit_tests:
+    stage: unit_tests
     script:
         - dotnet test test/General.Extensions.UnitTests/General.Extensions.UnitTests.csproj -c $CONFIGURATION --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
     artifacts:
