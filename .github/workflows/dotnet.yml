@@ -26,7 +26,6 @@ jobs:
       with:
         name: test
         path: |
-          src/*
+          src
           test
-          test/**
         retention-days: 2
