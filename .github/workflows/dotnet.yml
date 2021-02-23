@@ -24,7 +24,7 @@ jobs:
     - name: Collect_Test_Results
       uses: actions/upload-artifact@v2
       with:
-        name: test
+        name: artifacts
         path: |
           src
           test
