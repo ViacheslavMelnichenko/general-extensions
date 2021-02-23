@@ -21,3 +21,12 @@ jobs:
       run: dotnet build --no-restore -c Release
     - name: Test
       run: dotnet test test/General.Extensions.UnitTests/General.Extensions.UnitTests.csproj --no-build --verbosity normal -c Release
+    - name: Collect_Test_Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test
+        path: |
+          src/*
+          test
+          test/**
+        retention-days: 2
