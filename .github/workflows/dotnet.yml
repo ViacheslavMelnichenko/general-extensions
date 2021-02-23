@@ -7,10 +7,8 @@ on:
     branches: [ '*' ]
 
 jobs:
-  build:
-
+  build_test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -22,4 +20,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore -c Release
     - name: Test
-      run: dotnet test src/General.Extensions/General.Extensions.csproj --no-build --verbosity normal -c Release
+      run: dotnet test test/General.Extensions.UnitTests/General.Extensions.UnitTests.csproj --no-build --verbosity normal -c Release
